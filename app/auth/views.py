@@ -35,7 +35,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('您将要退出登入')
+    flash('已退出登入')
     return redirect(url_for('main.index'))
 
 @auth.route('/register',methods=['GET','POST'])

@@ -3,6 +3,7 @@ from wtforms import StringField,SubmitField,TextAreaField,BooleanField,SelectFie
 from wtforms.validators import DataRequired,Length,Email,Regexp
 from wtforms import ValidationError
 from ..models import *
+from flask_pagedown.fields import PageDownField
 
 class NameForm(FlaskForm):
     name = StringField('What is you name?',validators=[DataRequired()])
@@ -44,3 +45,6 @@ class EditProfileAdminForm(FlaskForm):
                 User.query.filter_by(username=field.data).first():
             raise ValidationError('该用户已存在.')
 
+class PostForm(FlaskForm):
+    body = PageDownField('想要写点什么？',validators=[DataRequired()])
+    submit = SubmitField('提交')
