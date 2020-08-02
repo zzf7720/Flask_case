@@ -22,9 +22,15 @@
                 <a href="{{ url_for('.edit', id=post.id) }}">
                     <span class="label label-primary">编辑</span>
                 </a>
+                <a href="{{ url_for('.delete',id=post.id) }}">
+                    <span class="label label-primary" style="float: right;background:red;" onclick="{if(confirm('确定删除吗?')){this.document.formname.submit();return true;}return false;}">删除</span>
+                </a>
                 {% elif current_user.is_administrator() %}
                 <a href="{{ url_for('.edit', id=post.id) }}">
-                    <span class="label label-danger">编辑 [管理员]</span>
+                    <span class="label label-danger" style="float: right;background:blue;">编辑 [管理员]</span>
+                </a>
+                <a href="{{ url_for('.delete',id=post.id) }}">
+                    <span class="label label-danger" style="float: right;" onclick="{if(confirm('确定删除吗?')){this.document.formname.submit();return true;}return false;}">删除 [管理员]</span>
                 </a>
                 {% endif %}
                 <a href="{{ url_for('.post', id=post.id) }}">
