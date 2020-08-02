@@ -1,9 +1,10 @@
 from flask_wtf import  FlaskForm
-from wtforms import StringField,SubmitField,TextAreaField,BooleanField,SelectField
+from wtforms import StringField,SubmitField,TextAreaField,BooleanField,SelectField,FileField
 from wtforms.validators import DataRequired,Length,Email,Regexp
 from wtforms import ValidationError
 from ..models import *
 from flask_pagedown.fields import PageDownField
+
 
 class NameForm(FlaskForm):
     name = StringField('What is you name?',validators=[DataRequired()])
@@ -11,6 +12,7 @@ class NameForm(FlaskForm):
 
 class EditProfileForm(FlaskForm):
     name = StringField('真实姓名', validators=[Length(0, 64)])
+    avatar = FileField('头像')
     location = StringField('地址', validators=[Length(0, 64)])
     about_me = TextAreaField('关于我')
     submit = SubmitField('提交')

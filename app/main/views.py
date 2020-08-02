@@ -5,7 +5,7 @@ from flask_login import login_required,current_user
 from . import main
 from .forms import *
 from ..decorators import admin_required,permission_required
-
+import os
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
@@ -51,6 +51,16 @@ def edit_profile():
         current_user.name = form.name.data
         current_user.location = form.location.data
         current_user.about_me = form.about_me.data
+        avatar = request.files['avatar']
+        fname = avatar.filename
+        UPLOAD_FOLDER = os.getcwd() + '\\app\\static\\avatar\\'
+        ALLOWED_EXTENSIONS = ['png','gif','jpeg','ipg']
+        flag = '.' in fname and fname.rsplit('.',1)[1] in ALLOWED_EXTENSIONS
+        if not flag:
+            flash('文件类型错误')
+            return redirect(url_for('main.user',username=current_user.username))
+        avatar.save('{}{}_{}'.format(UPLOAD_FOLDER,current_user.username,fname))
+        current_user.avatar = '/static/avatar/{}_{}'.format(current_user.username,fname)
         db.session.add(current_user._get_current_object())
         db.session.commit()
         flash('修改成功.')
@@ -59,6 +69,7 @@ def edit_profile():
     form.location.data = current_user.location
     form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', form=form)
+
 
 @main.route('/edit-profile/<int:id>', methods=['GET', 'POST'])
 @login_required
