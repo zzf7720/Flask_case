@@ -7,8 +7,8 @@ from flask_pagedown.fields import PageDownField
 
 
 class NameForm(FlaskForm):
-    name = StringField('What is you name?',validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    name = StringField('您是?',validators=[DataRequired()])
+    submit = SubmitField('提交')
 
 class EditProfileForm(FlaskForm):
     name = StringField('真实姓名', validators=[Length(0, 64)])
@@ -48,5 +48,5 @@ class EditProfileAdminForm(FlaskForm):
             raise ValidationError('该用户已存在.')
 
 class PostForm(FlaskForm):
-    body = PageDownField('想要写点什么？',validators=[DataRequired()])
+    body = PageDownField('写点什么？',validators=[DataRequired()])
     submit = SubmitField('提交')

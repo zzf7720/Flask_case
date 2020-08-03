@@ -6,7 +6,7 @@
 
 {% block page_content %}
 <div class="page-header">
-    {% if current_user.avatar %}
+    {% if user.avatar %}
     <img class="img-rounded profile-thumbnail" width="250" height="250" src="{{ user.avatar }}">
     {% else %}
     <img class="img-rounded profile-thumbnail" width="250" height="250" src="/static/avatar/default.png">

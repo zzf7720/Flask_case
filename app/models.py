@@ -106,6 +106,8 @@ class User(UserMixin, db.Model):
                                 lazy='dynamic',
                                 cascade='all, delete-orphan')
 
+
+
     @staticmethod
     def add_self_follows():
         for user in User.query.all():
