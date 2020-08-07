@@ -35,3 +35,7 @@ def posts(count=100):
                  author=u)
         db.session.add(p)
     db.session.commit()
+
+if __name__ == '__main__':
+    users(100)
+    posts(100)
